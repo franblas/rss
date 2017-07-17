@@ -77,10 +77,12 @@
    }
  ]
 
-function parseItem(item) {
+function parseItem(item, isFeed) {
+  var itemLink = item.find("link").text()
+  if (isFeed) itemLink = $(item.find("link")).attr("href")
   return {
     title: item.find("title").text(),
-    link: item.find("link").text(),
+    link: itemLink,
     description: item.find("description").text(),
     pubDate: item.find("pubDate").text(),
     author: item.find("author").text(),
@@ -97,9 +99,12 @@ function displayItems(fluxId, rssurl, color) {
       var $xml = $(data)
       var nbMaxItems = 10
       var arr = $xml.find("item")
-      if (arr.length === 0) arr = $xml.find("entry")
+      if (arr.length === 0) {
+        var isFeed = true
+        arr = $xml.find("entry")
+      }
       for (var i=0; i<nbMaxItems; i++) {
-        var item = parseItem($(arr[i]))
+        var item = parseItem($(arr[i]), isFeed)
         $("."+fluxId).append("<li><a href=\""+item.link+"\" title=\""+item.title+"\">"+item.title+"</a></li>")
       }
   })

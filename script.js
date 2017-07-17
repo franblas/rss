@@ -100,7 +100,7 @@ function displayItems(fluxId, rssurl, color) {
       if (arr.length === 0) arr = $xml.find("entry")
       for (var i=0; i<nbMaxItems; i++) {
         var item = parseItem($(arr[i]))
-        $("."+fluxId).append("<li><a href=\""+item.link+"\">"+item.title+"</a></li>")
+        $("."+fluxId).append("<li><a href=\""+item.link+"\" title=\""+item.title+"\">"+item.title+"</a></li>")
       }
   })
 }

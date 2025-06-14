@@ -93,7 +93,7 @@ function parseItem(item, isFeed) {
 }
 
 function displayItems(fluxId, rssurl, color) {
-  var corsProxy = "https://corsproxy.io/"
+  var corsProxy = "https://corsproxy.io/?url="
   var url = corsProxy + rssurl
   $.get(url, function(data) {
       var $xml = $(data)
